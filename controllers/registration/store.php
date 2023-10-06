@@ -35,6 +35,7 @@ $user = $db->query('select * from users where email = :email', [
 if ($user) {
     // then someone with that email already exists and has an account
     header('location: /');
+    exit();
 } else {
     // if not, save one to the database, and then log the user in
     $db->query('INSERT INTO users(email, password) VALUES(:email, :password)', [
@@ -42,7 +43,13 @@ if ($user) {
         'password' => $password
     ]);
 
+    $_SESSION['logged_in'] = true;
+    $_SESSION['user'] = [
+        'email' => $email
+    ];
+
     // and redirect
     header('location: /');
+    exit();
 }
 
