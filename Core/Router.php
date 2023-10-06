@@ -58,7 +58,6 @@ class Router
                 // apply the middleware
                 if ($route['middleware'] === 'guest') {
                     if ($_SESSION['logged_in'] ?? false) {
-                        dd($_SESSION['logged_in']);
                         header('location: /');
                         exit();
                     }
