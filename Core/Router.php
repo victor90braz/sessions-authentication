@@ -63,6 +63,14 @@ class Router
                     }
                 }
 
+                // apply the middleware
+                if ($route['middleware'] === 'auth') {
+                    if (!$_SESSION['logged_in'] ?? false) {
+                        header('location: /');
+                        exit();
+                    }
+                }
+
                 return require base_path($route['controller']);
             }
         }
