@@ -1,5 +1,7 @@
 <?php
 
+use Core\App;
+use Core\Database;
 use Core\Validator;
 
 $email = $_POST['email'];
@@ -22,6 +24,25 @@ if (! empty($errors)) {
     ]);
 }
 
+$db = App::resolve(Database::class);
+
 // check if the account already exists
-    // if yes, redirect to a login page
-    // if not, save one to the database, and then log the user in, and redirect
+$user = $db->query('select * from users where email = :email', [
+    'email' => $email
+])->find();
+
+// if yes, redirect to a login page
+if ($user) {
+    // then someone with that email already exists and has an account
+    header('location: /');
+} else {
+    // if not, save one to the database, and then log the user in
+    $db->query('INSERT INTO users(email, password) VALUES(:email, :password)', [
+        'email' => $email,
+        'password' => $password
+    ]);
+
+    // and redirect
+    header('location: /');
+}
+
