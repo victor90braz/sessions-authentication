@@ -1,8 +1,6 @@
 <?php
 
 session_start();
-echo getenv('TMPDIR');
-
 
 const BASE_PATH = __DIR__.'/../';
 
