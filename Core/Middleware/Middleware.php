@@ -6,8 +6,19 @@ use Core\Middleware\Guest;
 
 class Middleware {
 
-  const MAP = [
+  public const MAP = [
     'guest' => Guest::class,
     'auth' => Auth::class
   ];
+
+  static public function resolve($key) {
+
+    if (!$key) {
+      return;
+    }
+
+    $middleware = static::MAP[$key];
+
+    (new $middleware)->handle();
+  }
 }
