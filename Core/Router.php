@@ -54,6 +54,16 @@ class Router
     {
         foreach ($this->routes as $route) {
             if ($route['uri'] === $uri && $route['method'] === strtoupper($method)) {
+
+                // apply the middleware
+                if ($route['middleware'] === 'guest') {
+                    if ($_SESSION['logged_in'] ?? false) {
+                        dd($_SESSION['logged_in']);
+                        header('location: /');
+                        exit();
+                    }
+                }
+
                 return require base_path($route['controller']);
             }
         }
