@@ -1,5 +1,9 @@
 <?php
 
+session_start();
+echo getenv('TMPDIR');
+
+
 const BASE_PATH = __DIR__.'/../';
 
 require BASE_PATH.'Core/functions.php';
