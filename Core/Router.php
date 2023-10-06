@@ -2,6 +2,9 @@
 
 namespace Core;
 
+use Core\Middleware\Auth;
+use Core\Middleware\Guest;
+
 class Router
 {
     protected $routes = [];
@@ -57,18 +60,12 @@ class Router
 
                 // apply the middleware
                 if ($route['middleware'] === 'guest') {
-                    if ($_SESSION['logged_in'] ?? false) {
-                        header('location: /');
-                        exit();
-                    }
+                    (new Guest)->handle();
                 }
 
                 // apply the middleware
                 if ($route['middleware'] === 'auth') {
-                    if (!$_SESSION['logged_in'] ?? false) {
-                        header('location: /');
-                        exit();
-                    }
+                    (new Auth)->handle();
                 }
 
                 return require base_path($route['controller']);
