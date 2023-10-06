@@ -11,7 +11,8 @@ class Router
         $this->routes[] = [
             'uri' => $uri,
             'controller' => $controller,
-            'method' => $method
+            'method' => $method,
+            'middleware' => null
         ];
 
         return $this;
@@ -44,7 +45,9 @@ class Router
 
     public function only($key)
     {
-        dd($key);
+        $this->routes[array_key_last($this->routes)]['middleware'] = $key;
+
+        return $this;
     }
 
     public function route($uri, $method)
