@@ -9,8 +9,7 @@
     </div>
 
     <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-      <form class="space-y-6" action="/register" method="POST">
-        <input type="hidden" name="remember" value="true">
+      <form class="space-y-6" action="/sessions" method="POST">
         <div>
           <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email address</label>
           <div class="mt-2">
