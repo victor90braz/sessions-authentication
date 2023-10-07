@@ -40,7 +40,7 @@ if ($user) {
     // if not, save one to the database, and then log the user in
     $db->query('INSERT INTO users(email, password) VALUES(:email, :password)', [
         'email' => $email,
-        'password' => $password
+        'password' => password_hash($password, PASSWORD_BCRYPT)
     ]);
 
     $_SESSION['logged_in'] = true;
