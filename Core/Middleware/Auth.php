@@ -5,7 +5,7 @@ namespace Core\Middleware;
 class Auth {
 
   public function handle() {
-    if (!$_SESSION['logged_in'] ?? false) {
+    if (!$_SESSION['user'] ?? false) {
       header('location: /');
       exit();
     }
