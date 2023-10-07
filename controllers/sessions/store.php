@@ -30,7 +30,13 @@ $user = $db->query('select * from users where email = :email', [
 ])->find();
 
 
-dd($user);
+if (!$user) {
+  return view('sessions/create.view.php', [
+    'errors' => [
+      'email' => 'No matching account found for that email address.'
+    ]
+  ]);
+}
 
 // log in the user with the credentials match
 
