@@ -38,7 +38,7 @@ if (!$user) {
   ]);
 }
 
-// log in the user with the credentials match
+// we have a user, but we don't know if the password provided matches what we have in the database.
 
 if (password_verify($password, $user['password'])) {
   login([
