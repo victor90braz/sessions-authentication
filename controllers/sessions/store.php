@@ -49,3 +49,9 @@ if (password_verify($password, $user['password'])) {
   exit();
 }
 
+return view('sessions/create.view.php', [
+  'errors' => [
+    'email' => 'No matching account found for that email address and password.'
+  ]
+]);
+
