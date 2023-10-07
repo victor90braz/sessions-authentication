@@ -40,6 +40,12 @@ if (!$user) {
 
 // log in the user with the credentials match
 
-login([
-  'email' => $email
-]);
+if (password_verify($password, $user['password'])) {
+  login([
+    'email' => $email
+  ]);
+
+  header('location: /');
+  exit();
+}
+
